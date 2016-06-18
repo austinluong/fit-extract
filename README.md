@@ -9,7 +9,9 @@ in the same "Data.xlsv" file.
 
 Requires python3 and pandas.
 
-To install pandas, run from the command line: pip install pandas
+To install pandas, run from the command line:
+
+    pip install pandas
 
 Requires readFile.py and fitExtract.py to be in the same folder.
 
@@ -61,9 +63,6 @@ Result - Data.xlsx file created in both paths specified with following informati
             ...       | ...                | ...        | ...
 
             Additional Sheets: Ch 8, Ch 9
-
-Note: You don't need the two \\, just copy as normal. That is just
-to avoid errors in this docstring.
 
 
 TODO
