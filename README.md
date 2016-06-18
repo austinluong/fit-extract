@@ -19,8 +19,9 @@ Requires readFile.py and fitExtract.py to be in the same folder.
 USAGE
 -----
 Run from the command line:
-$ cd [path]/folder_with_fitExtract.py
-$ python fitExtract.py [options]
+
+    $ cd [path]/folder_with_fitExtract.py
+    $ python fitExtract.py [options]
 
 Running with no options will run the program in the same folder as fitExtract
 By default the program will only extract R2 (used for Ni/Al symmetric cells)
@@ -31,22 +32,30 @@ Important: Do not change file names of any of the files. This program requires
 
 Arguments available are:
 Folder (-f)
-$ python fitExtract.py -f [folderpath1] [folderpath2] ...
+
+    $ python fitExtract.py -f [folderpath1] [folderpath2] ...
+
 Runs the program in the specified folders. The path must be in quotes.
 
 Lithium Symmetric (-ls)
-$ python fitExtract.py -ls
+
+    $ python fitExtract.py -ls
+
 Extracts R2 and R3 and determines which is RInterface and RElectrolyte by setting
 the one with the higher value to be RInterface (not always correct but can adjusted
 manually in the .xlsv if needed).
 
 Additional (-add)
-$ python fitExtract.py -add param1 param2 ...
+
+    $ python fitExtract.py -add param1 param2 ...
+
 In additional to the default parameters extracted (R2, R3), the program will
 also extract the specfied parameters (Ex: Q2, a1). Note case matters.
 
 Custom (-c)
-$ python fitExtract.py -c param1 param2 ...
+
+    $ python fitExtract.py -c param1 param2 ...
+
 Extracts specified parameters intead of default (R2).
 
 
@@ -55,14 +64,14 @@ Examples:
 $ python fitExtract.py -f 'C:\Users\[USER_NAME]\[PATH]' 'C:\Users\[USER_NAME]\[PATH2]' -ls -add Q2
 Result - Data.xlsx file created in both paths specified with following information:
 
-            Sheet Name: Ch 7
+    Sheet Name: Ch 7
 
-            File Name | RElectrolyte (ohm) | RInterface | Q2 (F.s^(a-1)
-            ------------------------------------------------------------
-            file.fit  | 12345              | 29929      | .00000023
-            ...       | ...                | ...        | ...
+    File Name | RElectrolyte (ohm) | RInterface | Q2 (F.s^(a-1)
+    ------------------------------------------------------------
+    file.fit  | 12345              | 29929      | .00000023
+    ...       | ...                | ...        | ...
 
-            Additional Sheets: Ch 8, Ch 9
+    Additional Sheets: Ch 8, Ch 9
 
 
 TODO
