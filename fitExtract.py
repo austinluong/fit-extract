@@ -1,4 +1,5 @@
 """
+
 NOTE: Only works for L1+R1+Q2/R2+Q3/R3 circuit
 
 Extracts RInterface and RElectrolyte data from all '.fit' files in
@@ -7,15 +8,19 @@ in the same folder. '.fit' files are created by clicking save in
 the EC-LAB software after fitting (minimizing) a curve with Zfit.
 
 Run from the command line:
-$ cd [path]/folder_with_LithiumSymmetric.py
-$ python LithiumSymmetric.py [arg1] [arg2] [...]
+$ cd [path]/folder_with_fitExtract.py
+$ python fitExtract.py [arg1] [arg2] [...]
 
 The arguments are the filepath of the folders (in quotes)
 The program will run for each filepath given (infinitely many can be given)
 
 Ex:
-$ python LithiumSymmetric.py 'C:\Users\[USER_NAME]\[PATH]' 'C:\Users\[USER_NAME]\[PATH2]'
+$ python fitExtract.py 'C:\\Users\[USER_NAME]\[PATH]'
+                             'C:\\Users\[USER_NAME]\[PATH2]'
 Result: Data.xlsx file created in both folders specified
+Note: You don't need the two \\, just copy as normal. That is just
+to avoid errors in this docstring.
+
 """
 
 from ReadFile import *
