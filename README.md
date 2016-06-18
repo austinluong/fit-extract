@@ -1,13 +1,13 @@
 fitExtract (Conductivity Data Extraction for EC-LAB)
 ================================================
-Extracts RInterface and RElectrolyte data from all '.fit' files in
+Extracts parameter (R2, R3, Q1, etc.) data from all '.fit' files in
 a specified folder and writes the extracted data into a 'Data.xlsx' in the
 same folder. '.fit' files are created by clicking save in the EC-LAB software
 after fitting (minimizing) a curve with Zfit. If data from multiple channels
 is in the same folder, then the data will be separated into different sheets
 in the same "Data.xlsv" file.
 
-Requires python3 and pandas.
+Requires python3.X and pandas.
 
 To install pandas, run from the command line:
 
@@ -18,9 +18,10 @@ Requires readFile.py and fitExtract.py to be in the same folder.
 
 USAGE
 -----
+Install all the files and extract (or use git clone).
 Run from the command line:
 
-    $ cd [path]/folder_with_fitExtract.py
+    $ cd 'folderpath'
     $ python fitExtract.py [options]
 
 Running with no options will run the program in the same folder as fitExtract
@@ -34,9 +35,10 @@ Important: Do not change file names of any of the files. This program requires
 
 ###### Folder (-f)
 
-    $ python fitExtract.py -f [folderpath1] [folderpath2] ...
+    $ python fitExtract.py -f [folderpaths]...
 
 Runs the program in the specified folders. The path must be in quotes.
+Multiple folder paths can be specified.
 
 ###### Lithium Symmetric (-ls)
 
@@ -48,30 +50,30 @@ manually in the .xlsv if needed).
 
 ###### Additional (-add)
 
-    $ python fitExtract.py -add param1 param2 ...
+    $ python fitExtract.py -add [params]
 
 In additional to the default parameters extracted (R2, R3), the program will
-also extract the specfied parameters (Ex: Q2, a1). Note case matters.
+also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
 ###### Custom (-c)
 
-    $ python fitExtract.py -c param1 param2 ...
+    $ python fitExtract.py -c [params]
 
 Extracts specified parameters intead of default (R2).
 
 
 #### Examples:
 
-    $ python fitExtract.py -f 'C:\Users\[USER_NAME]\[PATH]' 'C:\Users\[USER_NAME]\[PATH2]' -ls -add Q2
+    $ python fitExtract.py -f 'C:\Users\[USER_NAME]\[PATH]' 'C:\Users\[USER_NAME]\[PATH2]' -ls -add Q2 a1
     
 Result - Data.xlsx file created in both paths specified with following information:
 
     Sheet Name: Ch 7
 
-    File Name | RElectrolyte (ohm) | RInterface | Q2 (F.s^(a-1)
-    ------------------------------------------------------------
-    file.fit  | 12345              | 29929      | .00000023
-    ...       | ...                | ...        | ...
+    File Name | RElectrolyte (ohm) | RInterface (ohm) | Q2 (F.s^(a-1)) | a1 ()
+    -------------------------------------------------------------------------------
+    file.fit  | 12345              | 29929            | .00000023      | 0.124
+    ...       | ...                | ...              | ...            | ...
 
     Additional Sheets: Ch 8, Ch 9
 
