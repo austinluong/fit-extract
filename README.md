@@ -31,6 +31,7 @@ Important: Do not change file names of any of the files. This program requires
            that the file name end in the default channel number format to work.
 
 Arguments available are:
+
 Folder (-f)
 
     $ python fitExtract.py -f [folderpath1] [folderpath2] ...
