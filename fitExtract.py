@@ -1,85 +1,129 @@
 """
 
-NOTE: Only works for L1+R1+Q2/R2+Q3/R3 circuit
-
-Extracts RInterface and RElectrolyte data from all '.fit' files in
-a specified folder and writes the extracted data into a 'Data.xlsx'
-in the same folder. '.fit' files are created by clicking save in
-the EC-LAB software after fitting (minimizing) a curve with Zfit.
-
-Run from the command line:
-$ cd [path]/folder_with_fitExtract.py
-$ python fitExtract.py [arg1] [arg2] [...]
-
-The arguments are the filepath of the folders (in quotes)
-The program will run for each filepath given (infinitely many can be given)
-
-Ex:
-$ python fitExtract.py 'C:\\Users\[USER_NAME]\[PATH]'
-                             'C:\\Users\[USER_NAME]\[PATH2]'
-Result: Data.xlsx file created in both folders specified
-Note: You don't need the two \\, just copy as normal. That is just
-to avoid errors in this docstring.
+See README.md for usage instructions
 
 """
 
-from ReadFile import *
+from readFile import *
 from pandas import DataFrame
-import sys
 import os
+import argparse
 
 
-def run(path=''):
+def getParamFromSearchParam(searchParam):
+    """
+    >>> getParamFromSearchParam('R1 =')
+    'R1'
+    """
+    return searchParam[:len(searchParam)-2]
+
+
+def getSearchParamFromParam(param):
+    """
+    >>> getSearchParamFromParam('R1')
+    'R1 ='
+    """
+    return param + ' ='
+
+
+def run(params, ls_case, path=''):
+    """Runs fitExtract.py"""
+
     filenames = getFitFileNames(path)
-    RInterface = []
-    RElectrolyte = []
+    searchParams = [getSearchParamFromParam(p) for p in params]
+    extractedValues = {p: [] for p in params}
+    paramToUnit = {}
 
     # Iterate through each file in folder
     for filename in filenames:
-        # Get R2 and R3 from file
-        f = open(filename, 'r')
-        f.readline()  # Title
-        f.readline()  # Space
-        f.readline()  # Title
-        f.readline()  # Subtitle
-        f.readline()  # Equivalent Circuit
-        f.readline()  # L1
-        f.readline()  # R1 = 0.1
-        f.readline()  # Q2
-        f.readline()  # a2
-        R2 = f.readline()  # R2
-        f.readline()  # Q3
-        f.readline()  # a3
-        R3 = f.readline()  # R3
+        # Get lines with parameters and append value to extractedValues
+        with open(filename, 'r') as f:
+            for line in f:
+                for sp in searchParams:
+                    if sp in line:
+                        p = getParamFromSearchParam(sp)
+                        paramToUnit[p] = getUnit(line)
+                        extractedValues[p].append(formatString(line))
 
-        # Retrieve value from string
-        R2 = formatString(R2)
-        R3 = formatString(R3)
-
-        # Determine identity of resistance and append
-        if R2 > R3:
-            RElectrolyte.append(R3)
-            RInterface.append(R2)
-        else:
-            RElectrolyte.append(R2)
-            RInterface.append(R3)
-
-    # If path specified
+    # If path specified, fix path and filenames
     if path:
-        if path[len(path)-1] != '/':
+        pathLength = len(path)
+        if path[pathLength - 1] != '/':
             path += '/'
-        # Fix filenames
-        filenames = [filename[len(path):] for filename in filenames]
+            pathLength += 1
+        filenames = [filename[pathLength:] for filename in filenames]
+    filenames = [filename[:len(filename)-4] for filename in filenames]
 
-    # Create xlsx of result
-    df = DataFrame({'File Name': filenames,
-                    'RElectrolyte': RElectrolyte,
-                    'RInterface': RInterface})
-    df.to_excel(path + 'Data.xlsx', sheet_name='sheet1', index=False)
+    # Create Table
+    table = {'{} ({})'.format(p, paramToUnit[p]): extractedValues[p]
+             for p in params}
 
-# Specify folder path in command line if
-if len(sys.argv) == 1:
-    run()
-else:
-    for path in sys.argv[1:]:
-        run(os.path.normpath(path))
+    # Determine RElec (set as R2) and RInt (set as R3) for lithium symmetric
+    if ls_case:
+        RElec = []
+        RInt = []
+        for R2, R3 in zip(extractedValues['R2'], extractedValues['R3']):
+            if R2 > R3:
+                RInt.append(R2)
+                RElec.append(R3)
+            else:
+                RInt.append(R3)
+                RElec.append(R2)
+
+        # Modify Table
+        del table['R2 (Ohm)']
+        del table['R3 (Ohm)']
+        table['RElectrolyte (Ohm)'] = RElec
+        table['RInterface (Ohm)'] = RInt
+
+    # Create DataFrame and export final data
+    df = DataFrame(table)
+    df.insert(0, 'File Name', filenames)
+    df.to_excel(path + 'Data.xlsx', sheet_name='Sheet 1', index=False)
+
+
+def main():
+    """Main method that implements arguments and options"""
+    parser = argparse.ArgumentParser(description='Extra data from .fit files')
+
+    # Arguments and help
+    parser.add_argument('-f', '--folder', nargs='*',
+                        help='runs fitExtract.py in specified folder paths')
+    parser.add_argument('-ls', '--lithiumsymmetric', action='store_true',
+                        help='extracts R2 and R3 and assigns to RInt or RElec')
+    parser.add_argument('-a', '--additional', nargs='*',
+                        help='adds additional parameters to extract')
+    parser.add_argument('-c', '--custom', nargs='*',
+                        help='extracts custom parameters instead of default')
+
+    # Options
+    args = parser.parse_args()
+    ls_case = False
+
+    # Pick one of ls, c, or default
+    assert not (args.lithiumsymmetric and args.custom), 'Pick one of -ls or -c'
+
+    # Set params for specified case
+    if args.lithiumsymmetric:
+        params = ['R2', 'R3']
+        ls_case = True
+    elif args.custom:
+        params = args.custom
+    else:
+        params = ['R2']
+
+    # Add more params if -a used
+    if args.additional:
+        for arg in args.additional:
+            params.append(arg)
+
+    # Run in specified folders if -f used, else run in containing folder
+    if args.folder:
+        for path in args.folder:
+            run(params, ls_case, os.path.normpath(path))
+    else:
+        run(params, ls_case)
+
+
+if __name__ == '__main__':
+    main()
