@@ -20,8 +20,13 @@ USAGE
 -----
 Run from the command line:
 
+<<<<<<< HEAD
     $ cd [path]/folder_with_fitExtract.py
     $ python fitExtract.py [options]
+=======
+    $ cd [FOLDERPATH]
+    $ python fitExtract.py [OPTIONS]
+>>>>>>> 04cedf3305a51be8ae02010535ca52d3374e663d
 
 Running with no options will run the program in the same folder as fitExtract
 By default the program will only extract R2 (used for Ni/Al symmetric cells)
@@ -32,13 +37,29 @@ Important: Do not change file names of any of the files. This program requires
 
 Arguments available are:
 
+<<<<<<< HEAD
 Folder (-f)
 
     $ python fitExtract.py -f [folderpath1] [folderpath2] ...
+=======
+###### Help (--help or -h)
+
+    $ python fitExtract.py -h
+    
+Displays usage information.
+
+###### Folder (--folder or -f)
+
+    $ python fitExtract.py -f [FOLDERPATH [FOLDERPATH]]
+>>>>>>> 04cedf3305a51be8ae02010535ca52d3374e663d
 
 Runs the program in the specified folders. The path must be in quotes.
 
+<<<<<<< HEAD
 Lithium Symmetric (-ls)
+=======
+###### Lithium Symmetric (--lithiumsymmetric or -ls)
+>>>>>>> 04cedf3305a51be8ae02010535ca52d3374e663d
 
     $ python fitExtract.py -ls
 
@@ -46,16 +67,28 @@ Extracts R2 and R3 and determines which is RInterface and RElectrolyte by settin
 the one with the higher value to be RInterface (not always correct but can adjusted
 manually in the .xlsv if needed).
 
+<<<<<<< HEAD
 Additional (-add)
 
     $ python fitExtract.py -add param1 param2 ...
+=======
+###### Additional (--additional or -a)
+
+    $ python fitExtract.py -add [PARAM [PARAM]]
+>>>>>>> 04cedf3305a51be8ae02010535ca52d3374e663d
 
 In additional to the default parameters extracted (R2, R3), the program will
 also extract the specfied parameters (Ex: Q2, a1). Note case matters.
 
+<<<<<<< HEAD
 Custom (-c)
 
     $ python fitExtract.py -c param1 param2 ...
+=======
+###### Custom (--custom or -c)
+
+    $ python fitExtract.py -c [PARAM [PARAM]]
+>>>>>>> 04cedf3305a51be8ae02010535ca52d3374e663d
 
 Extracts specified parameters intead of default (R2).
 
@@ -77,6 +110,11 @@ Result - Data.xlsx file created in both paths specified with following informati
 
 TODO
 -----
+<<<<<<< HEAD
 - Implement getopt for options
 - Create tests
 - Run all channels in same folder and separate into different sheets
+=======
+- Run all channels in same folder and separate into different sheets
+- Create tests
+>>>>>>> 04cedf3305a51be8ae02010535ca52d3374e663d
