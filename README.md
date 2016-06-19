@@ -88,3 +88,4 @@ TODO
 -----
 - Run all channels in same folder and separate into different sheets
 - Create tests
+- Implement better sorting for filenames
