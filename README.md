@@ -21,7 +21,7 @@ USAGE
 Install all the files and extract (or use git clone).
 Run from the command line:
 
-    $ cd "FOLDERPATH"
+    $ cd [FOLDERPATH]
     $ python fitExtract.py [OPTIONS]
 
 Running with no options will run the program in the same folder as fitExtract
@@ -33,14 +33,20 @@ Important: Do not change file names of any of the files. This program requires
 
 #### Arguments and Options:
 
-###### Folder (-f)
+###### Help (--help or -h)
 
-    $ python fitExtract.py -f folderpath [FOLDERPATHS]
+    $ python fitExtract.py -h
+    
+Displays usage information.
+
+###### Folder (--folder or -f)
+
+    $ python fitExtract.py -f [FOLDERPATH [FOLDERPATH]]
 
 Runs the program in the specified folders. The path must be in quotes.
 Multiple folder paths can be specified.
 
-###### Lithium Symmetric (-ls)
+###### Lithium Symmetric (--lithiumsymmetric or -ls)
 
     $ python fitExtract.py -ls
 
@@ -48,16 +54,16 @@ Extracts R2 and R3 and determines which is RInterface and RElectrolyte by settin
 the one with the higher value to be RInterface (not always correct but can adjusted
 manually in the .xlsv if needed).
 
-###### Additional (-add)
+###### Additional (--additional or -a)
 
-    $ python fitExtract.py -add param [PARAMS]
+    $ python fitExtract.py -add [PARAM [PARAM]]
 
 In additional to the default parameters extracted (R2, R3), the program will
 also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
-###### Custom (-c)
+###### Custom (--custom or -c)
 
-    $ python fitExtract.py -c param [PARAMS]
+    $ python fitExtract.py -c [PARAM [PARAM]]
 
 Extracts specified parameters intead of default (R2).
 
@@ -80,6 +86,5 @@ Result - Data.xlsx file created in both paths specified with following informati
 
 TODO
 -----
-- Implement argparse for options
-- Create tests
 - Run all channels in same folder and separate into different sheets
+- Create tests
