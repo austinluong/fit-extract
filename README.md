@@ -18,8 +18,8 @@ Requires readFile.py and fitExtract.py to be in the same folder.
 
 USAGE
 -----
-Install all the files and extract (or use git clone).
-Run from the command line:
+Install all the files and extract (or use git clone) to some location.
+Navigate to location from the command line and run:
 
     $ cd [FOLDERPATH]
     $ python fitExtract.py [OPTIONS]
