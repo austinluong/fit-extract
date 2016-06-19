@@ -7,7 +7,7 @@ after fitting (minimizing) a curve with Zfit. If data from multiple channels
 is in the same folder, then the data will be separated into different sheets
 in the same "Data.xlsv" file.
 
-Requires python3.X and pandas.
+Requires python 3.2.x or above and pandas.
 
 To install pandas, run from the command line:
 
@@ -21,8 +21,8 @@ USAGE
 Install all the files and extract (or use git clone).
 Run from the command line:
 
-    $ cd 'folderpath'
-    $ python fitExtract.py [options]
+    $ cd "FOLDERPATH"
+    $ python fitExtract.py [OPTIONS]
 
 Running with no options will run the program in the same folder as fitExtract
 By default the program will only extract R2 (used for Ni/Al symmetric cells)
@@ -31,11 +31,11 @@ R1 should be set to 0.1 ohm in EC-Lab.
 Important: Do not change file names of any of the files. This program requires
            that the file name end in the default channel number format to work.
 
-#### Arguments:
+#### Arguments and Options:
 
 ###### Folder (-f)
 
-    $ python fitExtract.py -f [folderpaths]...
+    $ python fitExtract.py -f folderpath [FOLDERPATHS]
 
 Runs the program in the specified folders. The path must be in quotes.
 Multiple folder paths can be specified.
@@ -50,14 +50,14 @@ manually in the .xlsv if needed).
 
 ###### Additional (-add)
 
-    $ python fitExtract.py -add [params]
+    $ python fitExtract.py -add param [PARAMS]
 
 In additional to the default parameters extracted (R2, R3), the program will
 also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
 ###### Custom (-c)
 
-    $ python fitExtract.py -c [params]
+    $ python fitExtract.py -c param [PARAMS]
 
 Extracts specified parameters intead of default (R2).
 
@@ -80,6 +80,6 @@ Result - Data.xlsx file created in both paths specified with following informati
 
 TODO
 -----
-- Implement getopt for options
+- Implement argparse for options
 - Create tests
 - Run all channels in same folder and separate into different sheets
