@@ -11,7 +11,7 @@ with open('LICENSE.txt') as f:
 
 setup(
     name='fitExtract',
-    version='1.0',
+    version='1.1.0',
     description='Extracts data from EC-Lab .fit files',
     long_description=readme,
     author='Austin Luong',
@@ -20,4 +20,6 @@ setup(
     license=license,
     packages=['fitExtract'],
     install_requires=["pandas >= 0.18.1"],
-    package_data={'': ['README.md', 'LICENSE']})
+    entry_points={
+        'console_scripts': ['fit-extract=fitExtract.__main__:main']}
+    )

@@ -1,4 +1,4 @@
-fitExtract (Conductivity Data Extraction for EC-LAB)
+fit-extract (Conductivity Data Extraction for EC-LAB)
 ================================================
 Extracts parameter (R2, R3, Q1, etc.) data from all '.fit' files in
 a specified folder and writes the extracted data into a 'Data.xlsx' in the
@@ -21,14 +21,14 @@ Alternatively, you can download the zip from github or use git clone.
 
 USAGE
 -----
-Run from the command line in the folder containing /fitExtract:
+Navigate to the folder containing the .fit files using the command line:
 
     $ cd [FOLDERPATH]
-    $ python fitExtract [OPTIONS]
+    $ python fit-extract [OPTIONS]
 
-Running with no options will run the program in the same folder as fitExtract
-By default the program will only extract R2 (used for Ni/Al symmetric cells)
-R1 should be set to 0.1 ohm in EC-Lab.
+Running with no options will run the program in the current directory. By default 
+the program will only extract R2 (used for Ni/Al symmetric cells). R1 should be set 
+to 0.1 ohm in EC-Lab.
 
 Important: Do not change file names of any of the files. This program requires
            that the file name end in the default channel number format to work.
@@ -37,20 +37,19 @@ Important: Do not change file names of any of the files. This program requires
 
 ###### Help (--help or -h)
 
-    $ python fitExtract -h
+    $ python fit-extract -h
     
 Displays usage information.
 
 ###### Folder (--folder or -f)
 
-    $ python fitExtract -f [FOLDERPATH [FOLDERPATH]]
+    $ python fit-extract -f [FOLDERPATH [FOLDERPATH...]]
 
-Runs the program in the specified folders. The path must be in quotes.
-Multiple folder paths can be specified.
+Runs the program in the specified folders (multiple can be specified). The path must be in quotes.
 
 ###### Lithium Symmetric (--lithiumsymmetric or -ls)
 
-    $ python fitExtract -ls
+    $ python fit-extract -ls
 
 Extracts R2 and R3 and determines which is RInterface and RElectrolyte by setting
 the one with the higher value to be RInterface (not always correct but can adjusted
@@ -58,21 +57,21 @@ manually in the .xlsv if needed).
 
 ###### Additional (--additional or -a)
 
-    $ python fitExtract -add [PARAM [PARAM]]
+    $ python fit-extract -add [PARAM [PARAM...]]
 
 In additional to the default parameters extracted (R2, R3), the program will
 also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
 ###### Custom (--custom or -c)
 
-    $ python fitExtract -c [PARAM [PARAM]]
+    $ python fit-extract -c [PARAM [PARAM...]]
 
 Extracts specified parameters intead of default (R2).
 
 
-#### Examples:
+#### Example:
 
-    $ python fitExtract -f 'C:\Users\[USER_NAME]\[PATH]' 'C:\Users\[USER_NAME]\[PATH2]' -ls -add Q2 a1
+    $ python fit-extract -f 'C:\Users\[USER_NAME]\[PATH]' 'C:\Users\[USER_NAME]\[PATH2]' -ls -add Q2 a1
     
 Result - Data.xlsx file created in both paths specified with following information:
 
@@ -91,4 +90,4 @@ TODO
 - Run all channels in same folder and separate into different sheets (DELAYED)
 - Create tests (IN PROGRESS)
 - Implement better sorting for filenames (LOW PRIORITY)
-- Get fitExtract to work from command line properly (IN PROGRESS)
+- Clean up redundant code (ex. don't need correctPath())

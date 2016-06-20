@@ -1,1 +1,3 @@
-v1.0, 6/19/2016 -- Initial release.
+v1.0.0, 6/19/2016 -- Initial release.
+v1.0.1, 6/19/2016 -- Converting to module.
+v.1.1.0, 6/19/2016 -- Fixed command line activation

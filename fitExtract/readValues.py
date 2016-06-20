@@ -1,7 +1,5 @@
-"""Helper functions for reading values from .fit files"""
-
-
-from util import *
+#!/usr/bin/env python
+from .util import *
 
 
 def getEndIndex(string):

@@ -1,7 +1,6 @@
 *__pycache__
 /*.fit
-/*.xlsv
 build
 dist
 *.egg-info
-dist
+*Data.xlsx
