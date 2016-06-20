@@ -68,6 +68,7 @@ def lineToValue(string):
 def extract(params, path=''):
     """Extracts values and units from files in a folder"""
     filenames = getFitFileNames(path)
+    assert filenames
     searchParams = [SearchParamFromParam(p) for p in params]
     extractedValues = {p: [] for p in params}
     paramToUnit = {}

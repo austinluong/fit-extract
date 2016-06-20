@@ -6,7 +6,7 @@ except ImportError:
 with open('README.md') as f:
     readme = f.read()
 
-with open('LICENSE') as f:
+with open('LICENSE.txt') as f:
     license = f.read()
 
 setup(
@@ -19,5 +19,5 @@ setup(
     url='https://github.com/austinluong/fitExtract',
     license=license,
     packages=['fitExtract'],
-    install_requires=['pandas'],
+    install_requires=["pandas >= 0.18.1"],
     package_data={'': ['README.md', 'LICENSE']})
