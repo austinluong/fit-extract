@@ -16,10 +16,10 @@ setup(
     long_description=readme,
     author='Austin Luong',
     author_email='austin1995@gmail.com',
-    url='https://github.com/austinluong/fitExtract',
+    url='https://github.com/austinluong/fit-extract',
     license=license,
-    packages=['fitExtract'],
+    packages=['fit_extract'],
     install_requires=["pandas >= 0.18.1"],
     entry_points={
-        'console_scripts': ['fit-extract=fitExtract.__main__:main']}
+        'console_scripts': ['fit-extract=fit_extract.__main__:main']}
     )

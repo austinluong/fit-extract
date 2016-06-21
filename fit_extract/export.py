@@ -46,7 +46,8 @@ def export(params, path, paramsToGroupBySize):
         df.insert(0, 'File Name', names)
         sheet = 'Ch. ' + channel
         df.to_excel(writer, sheet_name=sheet, index=False)
-        print('--Successfully extracted from {} ({} of {})'.format(sheet, i, length))
+        print('--Successfully extracted '
+              'from {} ({} of {})'.format(sheet, i, length))
         i += 1
 
     # Final expor
@@ -58,6 +59,7 @@ def main():
     """Implements arguments and options"""
     print('')
     start = timeit.default_timer()
+    errorCount = 0
 
     parser = argparse.ArgumentParser(description='Extra data from .fit files')
 
@@ -100,12 +102,17 @@ def main():
             except AssertionError:
                 print('ERROR: ' + path + ' does not contain any .fit files.'
                       ' Skiping...\n')
+                errorCount += 1
     else:
         try:
             export(params, correctPath(os.getcwd()), paramsToGroupBySize)
         except AssertionError:
             print('ERROR: current directory does not contain any .fit files.'
                   ' Exiting...\n')
+            errorCount += 1
+
+    # Runtime
     stop = timeit.default_timer()
     time = round(stop - start, 3)
-    print('Extraction completed successfully (runtime: {} seconds)'.format(time))
+    print('Extraction completed with {} error(s) '
+          '(runtime: {} seconds)'.format(errorCount, time))
