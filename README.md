@@ -90,4 +90,19 @@ Result - Data.xlsx file created in both paths specified with following informati
 TODO
 -----
 - Create tests (IN PROGRESS)
+    - Better test files
+    - Create a test case based on those test files
+    - Test each py file in fit_extract
 - Implement better sorting for filenames (LOW PRIORITY)
+    - Can do this using os.path.getctime
+    - Implement as -s or --sort
+        - Default: -s 
+            - Organizes based on .mpr file creation date
+        - Fit Option: -s fit
+            - Organizes based on .fit file creation date
+        - MPR Option: -s mpr 
+            - Same as default
+    - Make it general (take extension as input)
+    - Add as an attribute to the file constructor
+- Implement cycles
+    - Add as an attribute to the File cosntructor
