@@ -11,7 +11,7 @@ with open('LICENSE.txt') as f:
 
 setup(
     name='fit-extract',
-    version='1.2.0',
+    version='1.2.1',
     description='Extracts data from EC-Lab .fit files',
     long_description=readme,
     author='Austin Luong',

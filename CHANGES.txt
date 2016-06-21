@@ -2,3 +2,4 @@ v1.0.0, 6/19/2016 -- Initial release.
 v1.0.1, 6/19/2016 -- Converting to module.
 v.1.1.0, 6/19/2016 -- Fixed command line activation
 v.1.2.0, 6/21/2016 -- Cleaned up code, added sort
+v.1.2.1, 6/21/2016 -- Error count
