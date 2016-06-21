@@ -32,7 +32,7 @@ def getUnit(string):
     >>> getUnit(string)
     'Ohm'
     """
-    return string[getEndIndex(string)+1:len(string) - 1]
+    return string[getEndIndex(string) + 1: -1]
 
 
 def removeSpaces(string):
@@ -42,15 +42,7 @@ def removeSpaces(string):
     >>> removeSpaces(string)
     '1173'
     """
-    l = len(string)
-    i = 0
-    newString = ''
-    while i < l:
-        currentChar = string[i]
-        if currentChar != ' ':
-            newString += currentChar
-        i += 1
-    return newString
+    return ''.join([char for char in string if char != ' '])
 
 
 def lineToValue(string):
@@ -61,24 +53,3 @@ def lineToValue(string):
     1173.0
     """
     return float(removeSpaces(getNum(string)))
-
-
-def extract(params, path=''):
-    """Extracts values and units from files in a folder"""
-    filenames = getFitFileNames(path)
-    assert filenames
-    searchParams = [SearchParamFromParam(p) for p in params]
-    extractedValues = {p: [] for p in params}
-    paramToUnit = {}
-
-    # Iterate through each file in folder
-    for filename in filenames:
-        # Get lines with parameters and append value to extractedValues
-        with open(filename, 'r') as f:
-            for line in f:
-                for sp in searchParams:
-                    if sp in line:
-                        p = ParamFromSearchParam(sp)
-                        paramToUnit[p] = getUnit(line)
-                        extractedValues[p].append(lineToValue(line))
-    return extractedValues, paramToUnit, filenames

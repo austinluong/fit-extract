@@ -10,8 +10,8 @@ with open('LICENSE.txt') as f:
     license = f.read()
 
 setup(
-    name='fitExtract',
-    version='1.1.0',
+    name='fit-extract',
+    version='1.2.0',
     description='Extracts data from EC-Lab .fit files',
     long_description=readme,
     author='Austin Luong',
