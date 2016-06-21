@@ -1,4 +1,4 @@
-fit-extract (Conductivity Data Extraction for EC-LAB)
+fit-extract (Data Extraction for EC-LAB)
 ================================================
 Extracts parameter (R2, R3, Q1, etc.) data from all '.fit' files in
 a specified folder and writes the extracted data into a 'Data.xlsx' in the
@@ -14,7 +14,7 @@ INSTALL
 -----
 Run from the command line:
     
-    $ pip install fitExtract
+    $ pip install fit-extract
 
 Alternatively, you can download the zip from github or use git clone.
 
@@ -27,8 +27,9 @@ Navigate to the folder containing the .fit files using the command line:
     $ python fit-extract [OPTIONS]
 
 Running with no options will run the program in the current directory. By default 
-the program will only extract R2 (used for Ni/Al symmetric cells). R1 should be set 
-to 0.1 ohm in EC-Lab.
+the program will extract R2 and R3 and group the lower values and higher value of 
+each pair into the same column to ensure consistency. R1 should be set to 0.1 ohm 
+in EC-Lab.
 
 Important: Do not change file names of any of the files. This program requires
            that the file name end in the default channel number format to work.
@@ -45,15 +46,8 @@ Displays usage information.
 
     $ python fit-extract -f [FOLDERPATH [FOLDERPATH...]]
 
-Runs the program in the specified folders (multiple can be specified). The path must be in quotes.
-
-###### Lithium Symmetric (--lithiumsymmetric or -ls)
-
-    $ python fit-extract -ls
-
-Extracts R2 and R3 and determines which is RInterface and RElectrolyte by setting
-the one with the higher value to be RInterface (not always correct but can adjusted
-manually in the .xlsv if needed).
+Runs the program in the specified folders (multiple can be specified). 
+The path must be in quotes.
 
 ###### Additional (--additional or -a)
 
@@ -68,6 +62,14 @@ also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
 Extracts specified parameters intead of default (R2).
 
+###### Group By Size (--groupbysize or -gs)
+    
+    $ python fit-extract -c [PARAM_1 PARAM_2]
+
+Ensures consistency between two of the same type of parameter (default: ['R2', 'R3']) 
+by grouping their values by size.
+
+
 
 #### Example:
 
@@ -77,7 +79,7 @@ Result - Data.xlsx file created in both paths specified with following informati
 
     Sheet Name: Ch 7
 
-    File Name | RElectrolyte (ohm) | RInterface (ohm) | Q2 (F.s^(a-1)) | a1 ()
+    File Name | R2 (ohm)           | R3 (ohm)         | Q2 (F.s^(a-1)) | a1 ()
     -------------------------------------------------------------------------------
     file.fit  | 12345              | 29929            | .00000023      | 0.124
     ...       | ...                | ...              | ...            | ...
@@ -87,7 +89,5 @@ Result - Data.xlsx file created in both paths specified with following informati
 
 TODO
 -----
-- Run all channels in same folder and separate into different sheets (DELAYED)
 - Create tests (IN PROGRESS)
 - Implement better sorting for filenames (LOW PRIORITY)
-- Clean up redundant code (ex. don't need correctPath())
