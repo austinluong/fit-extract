@@ -31,7 +31,25 @@ def nameToChannel(name):
     channelString = name.split('_')[-1]
     if channelString[1] == '0':
         return channelString[-1]
+
     return channelString[1:]
+
+
+def makeCycleSortable(cycle):
+    """Lets cycle number be easily sorted lexicographically
+    >>> makeCycleSortable(2)
+    '002'
+    >>> makeCycleSortable(43)
+    '043'
+    >>> makeCycleSortable(152)
+    '152'
+    """
+    if cycle < 10:
+        return '00' + str(cycle)
+    elif cycle < 100:
+        return '0' + str(cycle)
+    else:
+        return str(cycle)
 
 
 def getFitFilePaths(path=''):

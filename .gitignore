@@ -1,7 +1,14 @@
-*__pycache__
-/*.fit
+venv
+
+# Setup
 build
 dist
 *.egg-info
+
+# Output
 *Data.xlsx
-venv
+*__pycache__
+
+# EC-LAB
+*.mgr
+*.zfit

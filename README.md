@@ -32,7 +32,8 @@ each pair into the same column to ensure consistency. R1 should be set to 0.1 oh
 in EC-Lab.
 
 Important: Do not change file names of any of the files. This program requires
-           that the file name end in the default channel number format to work.
+           that the file name end in the default channel number format to work. 
+           This also helps with sorting (done lexicographically by default)
 
 #### Arguments and Options:
 
@@ -49,22 +50,28 @@ Displays usage information.
 Runs the program in the specified folders (multiple can be specified). 
 The path must be in quotes.
 
-###### Additional (--additional or -a)
+###### Cycles (--cycle or -c)
 
-    $ python fit-extract -add [PARAM [PARAM...]]
+    $ python fit-extract -c
+
+If your data has cycles or loops, you will need to apply this optinon.
+
+###### Additional (--additional_parameters or -as)
+
+    $ python fit-extract -ap [PARAM [PARAM...]]
 
 In additional to the default parameters extracted (R2, R3), the program will
 also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
-###### Custom (--custom or -c)
+###### Custom (--custom_parameters or -cs)
 
-    $ python fit-extract -c [PARAM [PARAM...]]
+    $ python fit-extract -cp [PARAM [PARAM...]]
 
 Extracts specified parameters intead of default (R2).
 
 ###### Group By Size (--groupbysize or -gs)
     
-    $ python fit-extract -c [PARAM_1 PARAM_2]
+    $ python fit-extract -gs [PARAM_1 PARAM_2]
 
 Ensures consistency between two of the same type of parameter (default: ['R2', 'R3']) 
 by grouping their values by size.
@@ -90,8 +97,8 @@ Result - Data.xlsx file created in both paths specified with following informati
 TODO
 -----
 - Create tests (IN PROGRESS)
-    - Better test files
-    - Create a test case based on those test files
+    - Batch mode test files
+    - Create a test case for batch mode and cycles/loops mode
     - Test each py file in fit_extract
 - Implement better sorting for filenames (LOW PRIORITY)
     - Can do this using os.path.getctime
@@ -104,5 +111,3 @@ TODO
             - Same as default
     - Make it general (take extension as input)
     - Add as an attribute to the file constructor
-- Implement cycles
-    - Add as an attribute to the File cosntructor

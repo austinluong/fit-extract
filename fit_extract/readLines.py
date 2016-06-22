@@ -49,7 +49,7 @@ def lineToValue(string):
     """Returns a float of the value of a string
 
     >>> string = '   R2 = 1 173 Ohm\\n'
-    >>> formatString(string)
+    >>> lineToValue(string)
     1173.0
     """
     return float(removeSpaces(getNum(string)))
