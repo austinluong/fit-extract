@@ -1,0 +1,192 @@
+EC-Lab fit results file
+
+=== Z fit Analysis (06/22/16 01:30) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 0.130 4e-18 H
+   R1 = 0.1 Ohm
+   Q2 = 0.225 8e-9 F.s^(a-1)
+   a2 = 1 
+   R2 = 611.7 Ohm
+   Q3 = 1.081e-6 F.s^(a-1)
+   a3 = 0.538 8 
+   R3 = 181 695 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:31) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 0 H
+   R1 = 0.1 Ohm
+   Q2 = 0.283 5e-9 F.s^(a-1)
+   a2 = 1 
+   R2 = 609.6 Ohm
+   Q3 = 1.069e-6 F.s^(a-1)
+   a3 = 0.540 1 
+   R3 = 188 163 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:31) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 0 H
+   R1 = 0.1 Ohm
+   Q2 = 1.095e-6 F.s^(a-1)
+   a2 = 0.536 1 
+   R2 = 197 218 Ohm
+   Q3 = 0.204 8e-9 F.s^(a-1)
+   a3 = 1 
+   R3 = 582.7 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:31) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 0 H
+   R1 = 0.1 Ohm
+   Q2 = 1.065e-6 F.s^(a-1)
+   a2 = 0.539 6 
+   R2 = 200 310 Ohm
+   Q3 = 0.268 6e-9 F.s^(a-1)
+   a3 = 1 
+   R3 = 599.7 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:32) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 28.77e-45 H
+   R1 = 0.1 Ohm
+   Q2 = 0.209 5e-9 F.s^(a-1)
+   a2 = 1 
+   R2 = 591.2 Ohm
+   Q3 = 1.074e-6 F.s^(a-1)
+   a3 = 0.537 9 
+   R3 = 206 401 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:32) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 2.051e-189 H
+   R1 = 0.1 Ohm
+   Q2 = 1.033e-6 F.s^(a-1)
+   a2 = 0.543 3 
+   R2 = 206 666 Ohm
+   Q3 = 0.313 7e-9 F.s^(a-1)
+   a3 = 1 
+   R3 = 615.5 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:33) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 0 H
+   R1 = 0.1 Ohm
+   Q2 = 0.337 2e-9 F.s^(a-1)
+   a2 = 1 
+   R2 = 625.7 Ohm
+   Q3 = 1.015e-6 F.s^(a-1)
+   a3 = 0.545 4 
+   R3 = 208 915 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:33) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 0 H
+   R1 = 0.1 Ohm
+   Q2 = 0.289 1e-9 F.s^(a-1)
+   a2 = 1 
+   R2 = 593 Ohm
+   Q3 = 1.04e-6 F.s^(a-1)
+   a3 = 0.541 5 
+   R3 = 216 054 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:34) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 47.93e-69 H
+   R1 = 0.1 Ohm
+   Q2 = 0.270 1e-9 F.s^(a-1)
+   a2 = 1 
+   R2 = 592.5 Ohm
+   Q3 = 1.035e-6 F.s^(a-1)
+   a3 = 0.541 7 
+   R3 = 218 638 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
+=== Z fit Analysis (06/22/16 01:34) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 0 H
+   R1 = 0.1 Ohm
+   Q2 = 0.213 3e-9 F.s^(a-1)
+   a2 = 1 
+   R2 = 597.3 Ohm
+   Q3 = 1.036e-6 F.s^(a-1)
+   a3 = 0.541 2 
+   R3 = 222 076 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
