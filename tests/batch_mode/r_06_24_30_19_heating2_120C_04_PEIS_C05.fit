@@ -1,0 +1,21 @@
+EC-Lab fit results file
+
+=== Z fit Analysis (06/22/16 18:03) ===
+Equivalent circuit:
+   L1+R1+Q2/R2+Q3/R3
+   L1 = 0 H
+   R1 = 0.1 Ohm
+   Q2 = 0.252 6e-6 F.s^(a-1)
+   a2 = 0.876 7 
+   R2 = 11.99e153 Ohm
+   Q3 = 89.77e-12 F.s^(a-1)
+   a3 = 1 
+   R3 = 603.9 Ohm
+Fit:
+   select: current cycle(s)
+   method: Randomize + Simplex
+   randomize: all cycles
+   stop Randomize on: 15000 iterations
+   stop fit on: 5000 iterations
+   weight: |Z|
+
