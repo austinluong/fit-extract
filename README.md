@@ -31,45 +31,51 @@ the program will extract R2 and R3 and group the lower values and higher value o
 each pair into the same column to ensure consistency. R1 should be set to 0.1 ohm 
 in EC-Lab.
 
-Important: Do not change file names of any of the files. This program requires
-           that the file name end in the default channel number format to work. 
-           This also helps with sorting (done lexicographically by default)
+#### Important Usage Notes: 
+
+Do not change file names of any of the files. This program requires that the file name end in the default channel number format to work. This also helps with sorting (done lexicographically)
+
+When working with data that has cycles, you must use the cycles (-c, see below) option. 
+Also when saving your data in EC-Lab, do not click save multiple time for the same cycle. 
+This will messs up how the program extracts cycles and create extra cycles for each time you 
+do this. This does not matter if not using the cycles option as the program will extract the 
+most recent or latest save value.
 
 #### Arguments and Options:
 
-###### Help (--help or -h)
+**Help (--help or -h)**
 
     $ python fit-extract -h
     
 Displays usage information.
 
-###### Folder (--folder or -f)
+**Folder (--folder or -f)**
 
     $ python fit-extract -f [FOLDERPATH [FOLDERPATH...]]
 
 Runs the program in the specified folders (multiple can be specified). 
 The path must be in quotes.
 
-###### Cycles (--cycle or -c)
+**Cycles (--cycle or -c)**
 
     $ python fit-extract -c
 
 If your data has cycles or loops, you will need to apply this option.
 
-###### Additional (--additional_parameters or -ap)
+**Additional (--additional_parameters or -ap)**
 
     $ python fit-extract -ap [PARAM [PARAM...]]
 
 In additional to the default parameters extracted (R2, R3), the program will
 also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
-###### Custom (--custom_parameters or -cp)
+**Custom (--custom_parameters or -cp)**
 
     $ python fit-extract -cp [PARAM [PARAM...]]
 
 Extracts specified parameters intead of default (R2). Disables group by size unless added manually.
 
-###### Group By Size (--groupbysize or -gs)
+**Group By Size (--groupbysize or -gs)**
     
     $ python fit-extract -gs [PARAM_1 PARAM_2]
 
@@ -100,14 +106,4 @@ TODO
     - Batch mode test files
     - Create a test case for batch mode and cycles/loops mode
     - Test each py file in fit_extract
-- Implement better sorting for filenames (LOW PRIORITY)
-    - Can do this using os.path.getctime
-    - Implement as -s or --sort
-        - Default: -s 
-            - Organizes based on .mpr file creation date
-        - Fit Option: -s fit
-            - Organizes based on .fit file creation date
-        - MPR Option: -s mpr 
-            - Same as default
-    - Make it general (take extension as input)
-    - Add as an attribute to the file constructor
+- Update example.
