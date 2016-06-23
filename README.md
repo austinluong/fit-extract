@@ -33,13 +33,14 @@ in EC-Lab.
 
 #### Important Usage Notes: 
 
-Do not change file names of any of the files. This program requires that the file name end in the default channel number format to work. This also helps with sorting (done lexicographically)
+Do not change the file name of any of the files. This program requires that the file name end in the default channel number format to work. This also helps with sorting (done lexicographically)
 
 When working with data that has cycles, you must use the cycles (-c, see below) option. 
 Also when saving your data in EC-Lab, do not click save multiple time for the same cycle. 
-This will messs up how the program extracts cycles and create extra cycles for each time you 
-do this. This does not matter if not using the cycles option as the program will extract the 
-most recent or latest save value.
+This will mess up how the program extracts cycles and create extra cycles for each time you 
+do this. You can also just use the select all cycles option (randomize only on first cycle) in
+EC-Lab to avoid this risk and usually works fine if your results are clean. If you are not using 
+the cycles option, the most recent or latest save value so you are free to click save multiple times.
 
 #### Arguments and Options:
 

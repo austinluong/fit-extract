@@ -40,6 +40,7 @@ def export(params, path, paramsToGroupBySize, has_cycles, testMode=False):
         names = []
 
         # Obtain list of values and names from files in channel
+        cycles_column = []
         for File in channelToFiles[channel]:
             # Cycles case
             if has_cycles:
@@ -48,6 +49,7 @@ def export(params, path, paramsToGroupBySize, has_cycles, testMode=False):
                         extractedValues[p].append(getValue(File, p, cycle))
                     names.append('{}_cycle{}'.format(getName(File),
                                                      makeCycleSortable(cycle)))
+                    cycles_column.append(cycle + 1)
             else:
                 for p in params:
                     extractedValues[p].append(getValue(File, p))
@@ -58,12 +60,14 @@ def export(params, path, paramsToGroupBySize, has_cycles, testMode=False):
                  for p in params}
         df = DataFrame(table)
         df.insert(0, 'File Name', names)
+        if has_cycles:
+            df.insert(1, 'Cycle', cycles_column)
         if testMode:
             dfs.append([df, channel])
         sheet = 'Ch. ' + channel
         df.to_excel(writer, sheet_name=sheet, index=False)
         writer.sheets[sheet].column_dimensions['A'].width = len(
-            getName(channelToFiles[channel][0])) + 5
+            max(names, key=len))
         print('--Successfully extracted '
               'from {} ({} of {})'.format(sheet, i, length))
         i += 1

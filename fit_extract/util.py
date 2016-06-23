@@ -42,6 +42,7 @@ def makeCycleSortable(cycle):
     >>> makeCycleSortable(152)
     '152'
     """
+    cycle += 1
     if cycle < 10:
         return '00' + str(cycle)
     elif cycle < 100:

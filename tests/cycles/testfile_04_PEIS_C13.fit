@@ -189,4 +189,3 @@ Fit:
    stop Randomize on: 15000 iterations
    stop fit on: 5000 iterations
    weight: |Z|
-
