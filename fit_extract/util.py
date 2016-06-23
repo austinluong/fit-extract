@@ -15,8 +15,7 @@ def pathToName(filepath):
     >>> pathToName(pathFoo)
     'foo_C07'
     """
-    fileWithExtension = os.path.split(filepath)[1]
-    return os.path.splitext(fileWithExtension)[0]
+    return os.path.splitext(os.path.basename(filepath))[0]
 
 
 def nameToChannel(name):
@@ -31,7 +30,6 @@ def nameToChannel(name):
     channelString = name.split('_')[-1]
     if channelString[1] == '0':
         return channelString[-1]
-
     return channelString[1:]
 
 

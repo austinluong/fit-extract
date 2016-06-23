@@ -54,20 +54,20 @@ The path must be in quotes.
 
     $ python fit-extract -c
 
-If your data has cycles or loops, you will need to apply this optinon.
+If your data has cycles or loops, you will need to apply this option.
 
-###### Additional (--additional_parameters or -as)
+###### Additional (--additional_parameters or -ap)
 
     $ python fit-extract -ap [PARAM [PARAM...]]
 
 In additional to the default parameters extracted (R2, R3), the program will
 also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
-###### Custom (--custom_parameters or -cs)
+###### Custom (--custom_parameters or -cp)
 
     $ python fit-extract -cp [PARAM [PARAM...]]
 
-Extracts specified parameters intead of default (R2).
+Extracts specified parameters intead of default (R2). Disables group by size unless added manually.
 
 ###### Group By Size (--groupbysize or -gs)
     

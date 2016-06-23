@@ -11,11 +11,11 @@ def createFile(filepath, name, paramToValue, numberOfCycles=1):
     return File
 
 
-def getValue(File, param, cycle=0):
+def getValue(File, param, cycle=-1):
     return File['paramToValue'][param][cycle]
 
 
-def setValue(File, param, value, cycle=0):
+def setValue(File, param, value, cycle=-1):
     File['paramToValue'][param][cycle] = value
 
 
@@ -34,7 +34,7 @@ def getName(File):
 ######## Barrier ########
 
 
-def swapValues(File, paramsToSwap, cycle):
+def swapValues(File, paramsToSwap, cycle=-1):
     """Swaps the values of two parameters (p1, p2)"""
     p1 = paramsToSwap[0]
     p2 = paramsToSwap[1]
@@ -42,6 +42,23 @@ def swapValues(File, paramsToSwap, cycle):
     v2 = getValue(File, p2, cycle)
     setValue(File, p1, v2, cycle)
     setValue(File, p2, v1, cycle)
+
+
+def groupParamsBySize(File, paramsToGroupBySize, has_cycles):
+    """Groups parameterss by size"""
+    p1 = paramsToGroupBySize[0]
+    p2 = paramsToGroupBySize[1]
+    if has_cycles:
+        for cycle in getCycleRange(File):
+            v1 = getValue(File, p1, cycle)
+            v2 = getValue(File, p2, cycle)
+            if v1 > v2:
+                swapValues(File, (p1, p2), cycle)
+    else:
+        v1 = getValue(File, p1)
+        v2 = getValue(File, p2)
+        if v1 > v2:
+            swapValues(File, (p1, p2))
 
 
 def extract(params, filepath):
@@ -67,18 +84,9 @@ def extractFolder(params, path, paramsToGroupBySize, has_cycles):
     for filepath in filepaths:
         paramToValue, paramToUnit = extract(params, filepath)
         name = pathToName(filepath)
-        if has_cycles:
-            File = createFile(filepath, name, paramToValue,
-                              len(paramToValue[params[0]]))
-        else:
-            File = createFile(filepath, name, paramToValue)
+        File = createFile(filepath, name, paramToValue,
+                          len(paramToValue[params[0]]))
         if paramsToGroupBySize:
-            p1 = paramsToGroupBySize[0]
-            p2 = paramsToGroupBySize[1]
-            for cycle in getCycleRange(File):
-                v1 = getValue(File, p1, cycle)
-                v2 = getValue(File, p2, cycle)
-                if v1 > v2:
-                    swapValues(File, (p1, p2), cycle)
+            groupParamsBySize(File, paramsToGroupBySize, has_cycles)
         Files.append(File)
     return paramToUnit, Files

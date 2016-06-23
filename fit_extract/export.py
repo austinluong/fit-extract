@@ -4,6 +4,7 @@ from pandas import DataFrame, ExcelWriter
 import argparse
 import os
 import timeit
+import collections
 
 
 def groupFilesByChannel(Files):
@@ -15,7 +16,7 @@ def groupFilesByChannel(Files):
             channelToFiles[channel] = [File]
         else:
             channelToFiles[channel].append(File)
-    return channelToFiles
+    return collections.OrderedDict(sorted(channelToFiles.items()))
 
 
 def export(params, path, paramsToGroupBySize, has_cycles, testMode=False):
@@ -53,7 +54,7 @@ def export(params, path, paramsToGroupBySize, has_cycles, testMode=False):
                 names.append(getName(File))
 
         # Create Table, DataFrame, and export to a sheet
-        table = {'{} {}'.format(p, paramToUnit[p]): extractedValues[p]
+        table = {'{} ({})'.format(p, paramToUnit[p]): extractedValues[p]
                  for p in params}
         df = DataFrame(table)
         df.insert(0, 'File Name', names)

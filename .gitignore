@@ -12,3 +12,5 @@ dist
 # EC-LAB
 *.mgr
 *.zfit
+*.mpp
+*.mgp
