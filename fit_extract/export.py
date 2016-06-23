@@ -62,6 +62,8 @@ def export(params, path, paramsToGroupBySize, has_cycles, testMode=False):
             dfs.append([df, channel])
         sheet = 'Ch. ' + channel
         df.to_excel(writer, sheet_name=sheet, index=False)
+        writer.sheets[sheet].column_dimensions['A'].width = len(
+            getName(channelToFiles[channel][0])) + 5
         print('--Successfully extracted '
               'from {} ({} of {})'.format(sheet, i, length))
         i += 1
@@ -94,7 +96,6 @@ def main():
                              'grouped by value size')
     parser.add_argument('-c', '--cycles', action='store_true',
                         help='use this if you data has cycles/loops')
-
 
     # Options
     args = parser.parse_args()
