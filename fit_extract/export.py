@@ -129,10 +129,6 @@ def main():
                 print('ERROR: ' + path + ' is not a valid directory path.'
                       ' Skipping...\n')
                 errorCount += 1
-            except:
-                print('ERROR: unknown error occurred when extracting from ' +
-                      path + '. Skipping...\n')
-                errorCount += 1
     else:
         try:
             export(params, correctPath(os.getcwd()),
@@ -140,10 +136,6 @@ def main():
         except AssertionError:
             print('ERROR: current directory does not contain any .fit files.'
                   ' Exiting...\n')
-            errorCount += 1
-        except:
-            print('ERROR: unknown error occurred when extracting from '
-                  'current directory. Exiting...\n')
             errorCount += 1
 
     # Runtime
