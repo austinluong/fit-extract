@@ -46,48 +46,48 @@ the cycles option, the most recent or latest save value so you are free to click
 
 **Help (--help or -h)**
 
-    $ python fit-extract -h
+    $ fit-extract -h
     
 Displays usage information.
 
 **Folder (--folder or -f)**
 
-    $ python fit-extract -f [FOLDERPATH [FOLDERPATH...]]
+    $ fit-extract -f [FOLDERPATH [FOLDERPATH...]]
 
 Runs the program in the specified folders (multiple can be specified). 
 The path must be in quotes.
 
 **Cycles (--cycle or -c)**
 
-    $ python fit-extract -c
+    $ fit-extract -c
 
 If your data has cycles or loops, you will need to apply this option.
 
 **Additional (--additional_parameters or -ap)**
 
-    $ python fit-extract -ap [PARAM [PARAM...]]
+    $ fit-extract -ap [PARAM [PARAM...]]
 
 In additional to the default parameters extracted (R2, R3), the program will
 also extract extra specfied parameters (Ex: Q2, a1). Note case matters.
 
 **Custom (--custom_parameters or -cp)**
 
-    $ python fit-extract -cp [PARAM [PARAM...]]
+    $ fit-extract -cp [PARAM [PARAM...]]
 
-Extracts specified parameters intead of default (R2). Disables group by size unless added manually.
+Extracts specified parameters intead of default (R2, R3). Disables group by size unless added manually.
 
 **Group By Size (--groupbysize or -gs)**
     
-    $ python fit-extract -gs [PARAM_1 PARAM_2]
+    $ fit-extract -gs [PARAM_1 PARAM_2]
 
-Ensures consistency between two of the same type of parameter (default: ['R2', 'R3']) 
+Ensures consistency between two of the same type of parameter (default: R2, R3) 
 by grouping their values by size.
 
 
 
 #### Example:
 
-    $ python fit-extract -f 'C:\Users\[USER_NAME]\[PATH]' 'C:\Users\[USER_NAME]\[PATH2]' -ls -add Q2 a1
+    $ fit-extract -f 'C:\Users\[USER_NAME]\[PATH]' 'C:\Users\[USER_NAME]\[PATH2]' -ls -ap Q2 a1
     
 Result - Data.xlsx file created in both paths specified with following information:
 
