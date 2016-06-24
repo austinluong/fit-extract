@@ -103,8 +103,5 @@ Result - Data.xlsx file created in both paths specified with following informati
 
 TODO
 -----
-- Create tests (IN PROGRESS)
-    - Batch mode test files
-    - Create a test case for batch mode and cycles/loops mode
-    - Test each py file in fit_extract
 - Update example.
+- Better README / additional docs and images
