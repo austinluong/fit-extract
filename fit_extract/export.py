@@ -1,82 +1,74 @@
 #!/usr/bin/env python
-from .readFiles import *
-from pandas import DataFrame, ExcelWriter
 import argparse
 import os
 import timeit
-import collections
+from pandas import DataFrame, ExcelWriter
+from .readFiles import *
 
 
-def groupFilesByChannel(Files):
-    """Groups files by channel in a dictionary"""
-    channelToFiles = {}
-    for File in Files:
-        channel = nameToChannel(getName(File))
-        if channel not in channelToFiles:
-            channelToFiles[channel] = [File]
-        else:
-            channelToFiles[channel].append(File)
-    return collections.OrderedDict(sorted(channelToFiles.items()))
+def appendFileInfo(File, params, extractedValues, names):
+    """Appends File info to input arrays"""
+    for p in params:
+        extractedValues[p].append(getValue(File, p))
+    names.append(getName(File))
 
 
-def export(params, path, paramsToGroupBySize, has_cycles, testMode=False):
+def appendFileInfoCycles(File, params, extractedValues, names, cyclesColumn):
+    """Appends File info to input arrays, for cycles mode"""
+    for cycle in getCycleRange(File):
+        for p in params:
+            extractedValues[p].append(getValue(File, p, cycle))
+        names.append('{}_cycle{}'.format(getName(File),
+                                         makeCycleSortable(cycle)))
+        cyclesColumn.append(cycle + 1)
+
+
+def export(params, path, paramsToGroupBySize, hasCycles):
     """Formats extracted data and exports to Data.xlsv"""
     paramToUnit, Files = extractFolder(params, path,
-                                       paramsToGroupBySize, has_cycles)
-    print('Extracting from {}'.format(path))  # Start message
+                                       paramsToGroupBySize, hasCycles)
     channelToFiles = groupFilesByChannel(Files)
-
     writer = ExcelWriter(path + 'Data.xlsx')  # Needed to save multiple sheets
 
-    # For tests
-    if testMode:
-        dfs = []
-
-    # Different sheet for each channel
-    i = 1
-    length = len(channelToFiles)
+    # Iterate through channels
+    currentChannelIndex = 1
+    numOfChannels = len(channelToFiles)
     for channel in channelToFiles:
         extractedValues = {p: [] for p in params}
         names = []
+        cyclesColumn = []
 
         # Obtain list of values and names from files in channel
-        cycles_column = []
         for File in channelToFiles[channel]:
-            # Cycles case
-            if has_cycles:
-                for cycle in getCycleRange(File):
-                    for p in params:
-                        extractedValues[p].append(getValue(File, p, cycle))
-                    names.append('{}_cycle{}'.format(getName(File),
-                                                     makeCycleSortable(cycle)))
-                    cycles_column.append(cycle + 1)
+            if hasCycles:
+                appendFileInfoCycles(File, params, extractedValues,
+                                     names, cyclesColumn)
             else:
-                for p in params:
-                    extractedValues[p].append(getValue(File, p))
-                names.append(getName(File))
+                appendFileInfo(File, params, extractedValues, names)
 
-        # Create Table, DataFrame, and export to a sheet
+        # Create table / DataFrame
         table = {'{} ({})'.format(p, paramToUnit[p]): extractedValues[p]
                  for p in params}
         df = DataFrame(table)
         df.insert(0, 'File Name', names)
-        if has_cycles:
-            df.insert(1, 'Cycle', cycles_column)
-        if testMode:
-            dfs.append([df, channel])
+        if hasCycles:
+            df.insert(1, 'Cycle', cyclesColumn)
         sheet = 'Ch. ' + channel
+
+        # Add sheets and autofit column dimesntions
         df.to_excel(writer, sheet_name=sheet, index=False)
         writer.sheets[sheet].column_dimensions['A'].width = len(
             max(names, key=len))
-        print('--Successfully extracted '
-              'from {} ({} of {})'.format(sheet, i, length))
-        i += 1
 
-    # Final export
-    if testMode:
-        return dfs
-    else:
-        writer.save()
+        # Message
+        print('--Successfully extracted '
+              'from {} ({} of {})'.format(sheet,
+                                          currentChannelIndex,
+                                          numOfChannels))
+        currentChannelIndex += 1
+
+    # Export
+    writer.save()
     print('')
 
 
@@ -125,11 +117,21 @@ def main():
     if args.folder:
         for path in args.folder:
             try:
+                if not os.path.isdir(path):
+                    raise OSError
                 export(params, correctPath(path),
                        paramsToGroupBySize, args.cycles)
             except AssertionError:
                 print('ERROR: ' + path + ' does not contain any .fit files.'
-                      ' Skiping...\n')
+                      ' Skipping...\n')
+                errorCount += 1
+            except OSError:
+                print('ERROR: ' + path + ' is not a valid directory path.'
+                      ' Skipping...\n')
+                errorCount += 1
+            except:
+                print('ERROR: unknown error occurred when extracting from ' +
+                      path + '. Skipping...\n')
                 errorCount += 1
     else:
         try:
@@ -138,6 +140,10 @@ def main():
         except AssertionError:
             print('ERROR: current directory does not contain any .fit files.'
                   ' Exiting...\n')
+            errorCount += 1
+        except:
+            print('ERROR: unknown error occurred when extracting from '
+                  'current directory. Exiting...\n')
             errorCount += 1
 
     # Runtime

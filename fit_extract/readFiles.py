@@ -1,11 +1,11 @@
 #!/usr/bin/env python
+import collections
 from .readLines import *
 
 
-def createFile(filepath, name, paramToValue, numberOfCycles=1):
+def createFile(name, paramToValue, numberOfCycles=1):
     """Creates a dictionary storing file information"""
-    File = {'filepath': filepath,
-            'name': name,
+    File = {'name': name,
             'paramToValue': paramToValue,
             'numberOfCycles': numberOfCycles}
     return File
@@ -23,10 +23,6 @@ def getCycleRange(File):
     return range(File['numberOfCycles'])
 
 
-def getFilePath(File):
-    return File['filepath']
-
-
 def getName(File):
     return File['name']
 
@@ -34,8 +30,20 @@ def getName(File):
 ######## Barrier ########
 
 
+def groupFilesByChannel(Files):
+    """Groups files by channel in a dictionary"""
+    channelToFiles = {}
+    for File in Files:
+        channel = nameToChannel(getName(File))
+        if channel not in channelToFiles:
+            channelToFiles[channel] = [File]
+        else:
+            channelToFiles[channel].append(File)
+    return collections.OrderedDict(sorted(channelToFiles.items()))
+
+
 def swapValues(File, paramsToSwap, cycle=-1):
-    """Swaps the values of two parameters (p1, p2)"""
+    """Swaps the values of two parameters [p1, p2]"""
     p1 = paramsToSwap[0]
     p2 = paramsToSwap[1]
     v1 = getValue(File, p1, cycle)
@@ -80,12 +88,12 @@ def extractFolder(params, path, paramsToGroupBySize, has_cycles):
     """Extracts values and units from files in a folder"""
     filepaths = getFitFilePaths(path)
     Files = []
-    assert filepaths  # For skip / exit messages
+    assert filepaths  # Folder must contain .fit files
+    print('Extracting from {}'.format(path))
     for filepath in filepaths:
         paramToValue, paramToUnit = extract(params, filepath)
         name = pathToName(filepath)
-        File = createFile(filepath, name, paramToValue,
-                          len(paramToValue[params[0]]))
+        File = createFile(name, paramToValue, len(paramToValue[params[0]]))
         if paramsToGroupBySize:
             groupParamsBySize(File, paramsToGroupBySize, has_cycles)
         Files.append(File)

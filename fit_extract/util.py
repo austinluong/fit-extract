@@ -36,11 +36,11 @@ def nameToChannel(name):
 def makeCycleSortable(cycle):
     """Lets cycle number be easily sorted lexicographically
     >>> makeCycleSortable(2)
-    '002'
+    '003'
     >>> makeCycleSortable(43)
-    '043'
+    '044'
     >>> makeCycleSortable(152)
-    '152'
+    '153'
     """
     cycle += 1
     if cycle < 10:
@@ -57,7 +57,7 @@ def getFitFilePaths(path=''):
 
 
 def ParamFromSearchParam(searchParam):
-    """
+    """Get a parameter from a search parameter
     >>> ParamFromSearchParam('R1 =')
     'R1'
     """
@@ -65,7 +65,7 @@ def ParamFromSearchParam(searchParam):
 
 
 def SearchParamFromParam(param):
-    """
+    """Get a search parameter from a parameter
     >>> SearchParamFromParam('R1')
     'R1 ='
     """
